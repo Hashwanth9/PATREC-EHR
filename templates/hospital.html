@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hospital Login - PATREC</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    /* ================================
+           PAGE BACKGROUND
+        ================================= */
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.35),
+          rgba(0, 0, 0, 0.50)),
+        url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=2000&q=85");
+
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+
+    /* ================================
+           NAVBAR
+        ================================= */
+
+    .top-navbar {
+      height: 65px;
+      background: rgba(10, 20, 28, 0.95);
+      border: none;
+      border-radius: 0;
+      margin: 0;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .top-navbar .navbar-brand {
+      color: white !important;
+      font-size: 25px;
+      font-weight: bold;
+      line-height: 35px;
+      letter-spacing: 1px;
+    }
+
+    .top-navbar .navbar-brand:hover {
+      color: #39d353 !important;
+    }
+
+
+    /* ================================
+           PAGE TITLE
+        ================================= */
+
+    .page-title {
+      width: fit-content;
+      max-width: 90%;
+      margin: 35px auto 25px auto;
+
+      padding: 18px 35px;
+
+      background: rgba(12, 25, 32, 0.88);
+
+      border-radius: 16px;
+
+      text-align: center;
+
+      box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.35);
+
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .page-title h2 {
+      margin: 0;
+      color: white;
+
+      font-size: 29px;
+      font-weight: bold;
+
+      letter-spacing: 1px;
+    }
+
+    .title-line {
+      width: 75px;
+      height: 4px;
+
+      background: #20c957;
+
+      margin: 12px auto 0 auto;
+
+      border-radius: 10px;
+    }
+
+
+    /* ================================
+           FORM CARD
+        ================================= */
+
+    .form-container {
+      width: 760px;
+      max-width: 92%;
+
+      margin: 0 auto 50px auto;
+
+      padding: 32px 42px 38px 42px;
+
+      background: rgba(5, 15, 20, 0.82);
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.55);
+
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+
+    /* ================================
+           FORM GROUP
+        ================================= */
+
+    .form-group {
+      margin-bottom: 21px;
+    }
+
+
+    /* ================================
+           LABELS
+        ================================= */
+
+    .form-group label {
+      display: block;
+
+      color: white;
+
+      font-size: 14px;
+      font-weight: bold;
+
+      margin-bottom: 7px;
+
+      letter-spacing: 0.5px;
+    }
+
+
+    /* ================================
+           INPUT BOXES
+        ================================= */
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+
+      left: 14px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #b9c4c8;
+
+      font-size: 16px;
+
+      z-index: 2;
+    }
+
+    .form-control {
+      height: 45px;
+
+      padding-left: 43px;
+
+      background: rgba(17, 35, 28, 0.92) !important;
+
+      border: 1px solid #35d45b !important;
+
+      border-radius: 6px;
+
+      color: white !important;
+
+      font-size: 15px;
+
+      box-shadow: none !important;
+
+      transition: 0.25s ease;
+    }
+
+    .form-control::placeholder {
+      color: #b8c4be;
+    }
+
+    .form-control:focus {
+      border-color: #6cff88 !important;
+
+      box-shadow:
+        0 0 8px rgba(46, 220, 90, 0.45) !important;
+
+      background: rgba(20, 45, 30, 0.96) !important;
+    }
+
+
+    /* ================================
+           PASSWORD
+        ================================= */
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper .form-control {
+      padding-right: 50px;
+    }
+
+    .show-password {
+      position: absolute;
+
+      right: 15px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #b9c4be;
+
+      cursor: pointer;
+
+      font-size: 17px;
+
+      z-index: 5;
+    }
+
+    .show-password:hover {
+      color: #35d45b;
+    }
+
+
+    /* ================================
+           RADIO BUTTONS
+        ================================= */
+
+    .radio-section {
+      margin-top: 5px;
+    }
+
+    .radio-option {
+      display: inline-flex !important;
+
+      align-items: center;
+
+      margin-right: 35px;
+
+      color: white !important;
+
+      font-size: 15px !important;
+
+      font-weight: normal !important;
+
+      cursor: pointer;
+    }
+
+    .radio-option input {
+      appearance: none;
+
+      width: 17px;
+      height: 17px;
+
+      border: 2px solid #35d45b;
+
+      border-radius: 50%;
+
+      margin: 0 8px 0 0;
+
+      position: relative;
+
+      cursor: pointer;
+    }
+
+    .radio-option input:checked::after {
+      content: "";
+
+      position: absolute;
+
+      width: 7px;
+      height: 7px;
+
+      background: #35d45b;
+
+      border-radius: 50%;
+
+      top: 3px;
+      left: 3px;
+    }
+
+
+    /* ================================
+           BUTTONS
+        ================================= */
+
+    .button-row {
+      display: flex;
+
+      gap: 16px;
+
+      margin-top: 28px;
+    }
+
+    .btn-submit,
+    .btn-reset {
+      flex: 1;
+
+      height: 46px;
+
+      border-radius: 6px;
+
+      font-size: 15px;
+
+      font-weight: bold;
+
+      letter-spacing: 0.5px;
+
+      transition: 0.25s ease;
+    }
+
+    .btn-submit {
+      background: #27c957;
+
+      color: white;
+
+      border: 1px solid #27c957;
+    }
+
+    .btn-submit:hover {
+      background: #20aa49;
+
+      border-color: #20aa49;
+
+      color: white;
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 5px 15px rgba(39, 201, 87, 0.35);
+    }
+
+    .btn-reset {
+      background: transparent;
+
+      color: white;
+
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .btn-reset:hover {
+      background: rgba(255, 255, 255, 0.1);
+
+      color: white;
+
+      border-color: white;
+    }
+
+
+    /* ================================
+           ICONS
+        ================================= */
+
+    .button-icon {
+      margin-right: 7px;
+    }
+
+
+    /* ================================
+           FOOTER
+        ================================= */
+
+    .footer-text {
+      text-align: center;
+
+      color: rgba(255, 255, 255, 0.75);
+
+      font-size: 12px;
+
+      padding-bottom: 25px;
+    }
+
+
+    /* ================================
+           MOBILE
+        ================================= */
+
+    @media (max-width: 768px) {
+
+      .page-title {
+        margin-top: 20px;
+
+        padding: 15px 18px;
+      }
+
+      .page-title h2 {
+        font-size: 21px;
+      }
+
+      .form-container {
+        padding: 25px 20px 30px 20px;
+      }
+
+      .button-row {
+        flex-direction: column;
+      }
+
+      .btn-submit,
+      .btn-reset {
+        width: 100%;
+      }
+
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ================================
+         NAVIGATION
+    ================================= -->
+
+  <nav class="navbar top-navbar">
+
+    <div class="container-fluid">
+
+      <a href="/" class="navbar-brand">
+        <i class="fa fa-home"></i>
+        HOME
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- ================================
+         TITLE
+    ================================= -->
+
+  <section class="page-title">
+
+    <h2>
+      LOGIN TO BECOME A MEMBER OF PATREC-CHAIN
+    </h2>
+
+    <div class="title-line"></div>
+
+  </section>
+
+
+  <!-- ================================
+         FORM
+    ================================= -->
+
+  <form action="/admver" method="POST" id="adminForm">
+
+
+    <div class="form-container">
+
+
+      <!-- OFFICIAL NAME -->
+
+      <div class="form-group">
+
+        <label for="n">
+          OFFICIAL NAME
+        </label>
+
+        <div class="input-wrapper">
+
+          <i class="fa fa-user"></i>
+
+          <input type="text" class="form-control" id="n" name="n" placeholder="Enter official name" autocomplete="name"
+            required>
+
+        </div>
+
+      </div>
+
+
+      <!-- PASSWORD -->
+
+      <div class="form-group">
+
+        <label for="pwd">
+          PASSWORD
+        </label>
+
+        <div class="password-wrapper">
+
+          <i class="fa fa-lock" style="
+                       position:absolute;
+                       left:14px;
+                       top:50%;
+                       transform:translateY(-50%);
+                       color:#b9c4c8;
+                       z-index:2;">
+          </i>
+
+          <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter password"
+            autocomplete="new-password" required>
+
+          <i class="fa fa-eye show-password" id="togglePassword">
+          </i>
+
+        </div>
+
+      </div>
+
+
+      <!-- ORGANISATION -->
+
+      <div class="form-group">
+
+        <label for="organisation">
+          ORGANISATION UNDER WHICH YOU WORK
+        </label>
+
+        <div class="input-wrapper">
+
+          <i class="fa fa-hospital-o"></i>
+
+          <input type="text" class="form-control" id="organisation" name="organisation"
+            placeholder="Enter organisation name">
+
+        </div>
+
+      </div>
+
+
+      <!-- GOVERNMENT AIDED -->
+
+      <div class="form-group">
+
+        <label>
+          IS YOUR FIRM GOVERNMENT AIDED ?
+        </label>
+
+        <div class="radio-section">
+
+          <label class="radio-option">
+
+            <input type="radio" name="defaultExampleRadios" value="YES" id="yes">
+
+            YES
+
+          </label>
+
+
+          <label class="radio-option">
+
+            <input type="radio" name="defaultExampleRadios" value="NO" id="no" checked>
+
+            NO
+
+          </label>
+
+        </div>
+
+      </div>
+
+
+
+
+
+      <!-- EMAIL -->
+
+      <div class="form-group">
+
+        <label for="inputUserName">
+          OFFICIAL EMAIL
+        </label>
+
+        <div class="input-wrapper">
+
+          <i class="fa fa-envelope"></i>
+
+          <input type="email" class="form-control" id="inputUserName" name="email" placeholder="Enter official email">
+
+        </div>
+
+      </div>
+
+
+      <!-- CITY -->
+
+      <div class="form-group">
+
+        <label for="city">
+          CITY
+        </label>
+
+        <div class="input-wrapper">
+
+          <i class="fa fa-map-marker"></i>
+
+          <input type="text" class="form-control" id="city" name="city" placeholder="Enter city">
+
+        </div>
+
+      </div>
+
+
+      <!-- DOMAIN -->
+
+      <div class="form-group">
+
+        <label for="domain">
+          DOMAIN
+        </label>
+
+        <div class="input-wrapper">
+
+          <i class="fa fa-building"></i>
+
+          <input type="text" class="form-control" id="domain" name="domain" placeholder="Enter domain">
+
+        </div>
+
+      </div>
+
+
+      <!-- BUTTONS -->
+
+      <div class="button-row">
+
+        <button type="submit" class="btn btn-submit">
+
+          <i class="fa fa-user-plus button-icon"></i>
+
+          SUBMIT
+
+        </button>
+
+
+        <button type="reset" class="btn btn-reset">
+
+          <i class="fa fa-refresh button-icon"></i>
+
+          RESET
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+
+  </form>
+
+
+  <div class="footer-text">
+
+    PATREC-CHAIN &nbsp; | &nbsp; Secure Healthcare Records
+
+  </div>
+
+
+  <!-- ================================
+         PASSWORD SHOW/HIDE
+    ================================= -->
+
+  <script>
+
+    const togglePassword =
+      document.getElementById("togglePassword");
+
+    const password =
+      document.getElementById("pwd");
+
+
+    togglePassword.addEventListener("click", function () {
+
+      const type =
+        password.getAttribute("type") === "password"
+          ? "text"
+          : "password";
+
+      password.setAttribute("type", type);
+
+
+      if (type === "text") {
+
+        this.classList.remove("fa-eye");
+
+        this.classList.add("fa-eye-slash");
+
+      } else {
+
+        this.classList.remove("fa-eye-slash");
+
+        this.classList.add("fa-eye");
+
+      }
+
+    });
+
+  </script>
+
+
+</body>
+
+</html>
